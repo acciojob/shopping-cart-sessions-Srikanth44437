@@ -6,6 +6,9 @@ const products = [
   { id: 5, name: "Product 5", price: 50 },
 ];
 
+
+
+// Render product list
 function renderProducts() {
   const productList = document.getElementById("product-list");
   productList.innerHTML = "";
@@ -16,6 +19,7 @@ function renderProducts() {
   });
 }
 
+// Add item to cart
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   if (product) {
@@ -26,9 +30,10 @@ function addToCart(productId) {
   }
 }
 
+// Render cart list
 function renderCart() {
   const cartList = document.getElementById("cart-list");
-  const clearCartBtn = document.getElementById("clear-cart-btn");
+  const clearcartBtn = document.getElementById("clear-cart-btn");
   cartList.innerHTML = "";
   const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   if (cart.length > 0) {
@@ -37,20 +42,22 @@ function renderCart() {
       li.innerHTML = `${product.name} - $${product.price}`;
       cartList.appendChild(li);
     });
-    clearCartBtn.style.display = "block";
+    clearcartBtn.style.display = "block";
   } else {
     const li = document.createElement("li");
-    li.textContent = "Your cart is empty.";
+    li.textContent = "your cart is empty";
     cartList.appendChild(li);
-    clearCartBtn.style.display = "none";
+    clearcartBtn.style.display = "none";
   }
 }
 
+// Clear cart
 function clearCart() {
   sessionStorage.removeItem("cart");
   renderCart();
 }
 
+// Initial render
 renderProducts();
 renderCart();
 
